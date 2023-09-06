@@ -15,6 +15,7 @@ EXERCISE_TYPE = [
     ("quiz", "quiz")
 ]
 
+
 class Course(models.Model):
     title = models.CharField(
         _('Title'),
@@ -49,13 +50,11 @@ class Course(models.Model):
     )
     created_at = models.DateTimeField(
         _('Created at'),
-        default=timezone.now,
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         _('Updated at'),
-        default=timezone.now,
-        auto_now_add=True
+        auto_now=True
     )
 
     def __str__(self):
@@ -103,13 +102,11 @@ class Module(models.Model):
     )
     created_at = models.DateTimeField(
         _('Created at'),
-        default=timezone.now,
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         _('Updated at'),
-        default=timezone.now,
-        auto_now_add=True
+        auto_now=True
     )
 
     def __str__(self):
@@ -156,13 +153,11 @@ class Exercise(models.Model):
     )
     created_at = models.DateTimeField(
         _('Created at'),
-        default=timezone.now,
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         _('Updated at'),
-        default=timezone.now,
-        auto_now_add=True
+        auto_now=True
     )
 
     def __str__(self):

@@ -36,14 +36,12 @@ class Profile(models.Model):
     )
     created_at = models.DateTimeField(
         _('Created at'),
-        default=timezone.now,
         db_index=True,
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
         _('Updated at'),
-        default=timezone.now,
-        auto_now_add=True
+        auto_now=True
     )
 
     def __str__(self):
