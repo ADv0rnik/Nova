@@ -6,14 +6,13 @@ from contextlib import suppress
 from django.conf import settings
 from django.utils import timezone
 
-from utils import merge_dict
+from .utils import merge_dict
 
 
 class ApplicationJSONFormatter(json_log_formatter.JSONFormatter):
-    def __init__(self, *args, indent=None, raw_json_fields=None, **kwargs):
+    def __init__(self, *args, indent=None, **kwargs):
         super().__init__(*args, **kwargs)
         self._indent = indent
-        self._raw_json_fields = dict.fromkeys(raw_json_fields or ())
 
     def json_record(self, message, extra, record):
         json_record = super().json_record(message, extra, record)

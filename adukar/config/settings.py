@@ -1,16 +1,15 @@
+import os
+
 from pathlib import Path
 from decouple import config
-import os
+
+from .log_settings import ApplicationJSONFormatter
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = config('SECRET_KEY')
-
 DEBUG = config('DEBUG')
-
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -115,28 +114,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGGING_CONFIG = {
+LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "standard": {
-            "format": "%(levelname)-7s %(asctime)s %(message)s"
+        "json": {
+            "()": ApplicationJSONFormatter,
+            "indent": 4,
         }
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "formatter": "standard"
+            "formatter": "json"
         },
         "file": {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": os.path.join(BASE_DIR, 'logs', 'api.log'),
-            "formatter": "standard",
-            "encoding": "UTF-8",
-            "maxBytes": 10 * 1024 * 1024,
-            "backupCount": 1000
+            "filename": os.path.join(BASE_DIR, 'logs', 'json.log'),
+            "formatter": "json"
         }
     },
     "loggers": {
