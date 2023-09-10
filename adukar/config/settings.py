@@ -114,3 +114,35 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "format": "%(levelname)-7s %(asctime)s %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "standard"
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": os.path.join(BASE_DIR, 'logs', 'api.log'),
+            "formatter": "standard",
+            "encoding": "UTF-8",
+            "maxBytes": 10 * 1024 * 1024,
+            "backupCount": 1000
+        }
+    },
+    "loggers": {
+        "adukar": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG"
+        }
+    }
+}

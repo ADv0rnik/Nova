@@ -16,3 +16,7 @@ class CoursesView(ListView):
         return context
 
 
+def index(request):
+    pass
+
+

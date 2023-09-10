@@ -3,8 +3,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from ..courses.views import index
+
 
 urlpatterns = [
+    path('', index, name='home'),
     path('admin/', admin.site.urls),
     path('courses/', include('courses.urls'))
 ]
