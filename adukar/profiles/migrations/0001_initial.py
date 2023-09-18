@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,20 +14,62 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=50, verbose_name='First Name')),
-                ('last_name', models.CharField(max_length=50, verbose_name='Last Name')),
-                ('nickname', models.CharField(blank=True, max_length=100, null=True, verbose_name='nickname')),
-                ('is_teacher', models.BooleanField(default=False, verbose_name='Is teacher')),
-                ('occupation', models.CharField(blank=True, max_length=100, null=True, verbose_name='occupation')),
-                ('created_at', models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(max_length=50, verbose_name="First Name"),
+                ),
+                (
+                    "last_name",
+                    models.CharField(max_length=50, verbose_name="Last Name"),
+                ),
+                (
+                    "nickname",
+                    models.CharField(
+                        blank=True, max_length=100, null=True, verbose_name="nickname"
+                    ),
+                ),
+                (
+                    "is_teacher",
+                    models.BooleanField(default=False, verbose_name="Is teacher"),
+                ),
+                (
+                    "occupation",
+                    models.CharField(
+                        blank=True, max_length=100, null=True, verbose_name="occupation"
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, db_index=True, verbose_name="Created at"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="user",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Profiles',
+                "verbose_name_plural": "Profiles",
             },
         ),
     ]
