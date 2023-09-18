@@ -5,62 +5,180 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250, verbose_name='Title')),
-                ('num_lessons', models.IntegerField(default=0, verbose_name='Number Of Lessons')),
-                ('description', models.TextField(blank=True, max_length=250, null=True, verbose_name='Description')),
-                ('category', models.CharField(choices=[('life', 'life'), ('computer', 'computer')], max_length=100, verbose_name='Category')),
-                ('ranking', models.DecimalField(decimal_places=2, default=0, max_digits=3, verbose_name='Ranking')),
-                ('slug', models.SlugField(max_length=255, unique=True, verbose_name='URL')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=250, verbose_name="Title")),
+                (
+                    "num_lessons",
+                    models.IntegerField(default=0, verbose_name="Number Of Lessons"),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        max_length=250,
+                        null=True,
+                        verbose_name="Description",
+                    ),
+                ),
+                (
+                    "category",
+                    models.CharField(
+                        choices=[("life", "life"), ("computer", "computer")],
+                        max_length=100,
+                        verbose_name="Category",
+                    ),
+                ),
+                (
+                    "ranking",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0,
+                        max_digits=3,
+                        verbose_name="Ranking",
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(max_length=255, unique=True, verbose_name="URL"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Courses',
+                "verbose_name_plural": "Courses",
             },
         ),
         migrations.CreateModel(
-            name='Module',
+            name="Module",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, verbose_name='Title')),
-                ('nm_exercises', models.IntegerField(default=0, verbose_name='Number Of Exercises')),
-                ('image', models.ImageField(blank=True, default='default.png', null=True, upload_to='', verbose_name='Image')),
-                ('overview', models.TextField(blank=True, null=True, verbose_name='Overview')),
-                ('slug', models.SlugField(max_length=255, unique=True, verbose_name='URL')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.course')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, verbose_name="Title")),
+                (
+                    "nm_exercises",
+                    models.IntegerField(default=0, verbose_name="Number Of Exercises"),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        default="default.png",
+                        null=True,
+                        upload_to="",
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "overview",
+                    models.TextField(blank=True, null=True, verbose_name="Overview"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(max_length=255, unique=True, verbose_name="URL"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="courses.course"
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Modules',
+                "verbose_name_plural": "Modules",
             },
         ),
         migrations.CreateModel(
-            name='Exercise',
+            name="Exercise",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, verbose_name='Title')),
-                ('description', models.TextField(blank=True, max_length=250, null=True, verbose_name='Description')),
-                ('ex_type', models.CharField(choices=[('watch', 'watch'), ('read', 'read'), ('quiz', 'quiz')], verbose_name='Type Of Exercise')),
-                ('points', models.IntegerField(default=0, verbose_name='Points')),
-                ('slug', models.SlugField(max_length=255, unique=True, verbose_name='URL')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('module', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.module')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, verbose_name="Title")),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        max_length=250,
+                        null=True,
+                        verbose_name="Description",
+                    ),
+                ),
+                (
+                    "ex_type",
+                    models.CharField(
+                        choices=[
+                            ("watch", "watch"),
+                            ("read", "read"),
+                            ("quiz", "quiz"),
+                        ],
+                        verbose_name="Type Of Exercise",
+                    ),
+                ),
+                ("points", models.IntegerField(default=0, verbose_name="Points")),
+                (
+                    "slug",
+                    models.SlugField(max_length=255, unique=True, verbose_name="URL"),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "module",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="courses.module"
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Exercises',
+                "verbose_name_plural": "Exercises",
             },
         ),
     ]
