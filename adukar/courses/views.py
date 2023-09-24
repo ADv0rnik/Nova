@@ -27,4 +27,4 @@ class CoursesView(ListView):
 
 
 def index(request):
-    pass
+    return render(request, 'home.html')
