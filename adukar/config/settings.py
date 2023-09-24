@@ -7,7 +7,7 @@ from .log_settings import ApplicationJSONFormatter
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
+
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 ALLOWED_HOSTS = [
@@ -48,7 +48,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,8 +110,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
