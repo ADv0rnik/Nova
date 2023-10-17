@@ -15,4 +15,4 @@ def create_student_profile(sender, instance, created, **kwargs):
             last_name=instance.last_name,
             mail=instance.email,
         )
-        print('Profile created!')
+        print("Profile created!")

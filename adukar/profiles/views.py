@@ -4,6 +4,21 @@ from django.shortcuts import render, redirect
 
 from decorators import unauthenticated_user
 
+from .forms import CreateUserForm
+
+
+def register_user(request):
+    form = CreateUserForm()
+
+    if request == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
+
+    return render(request, 'register.html', context=context)
+
 
 @unauthenticated_user
 def login_user(request):
