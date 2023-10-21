@@ -1,23 +1,31 @@
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.views.generic import FormView
 
-from decorators import unauthenticated_user
-
+from .decorators import unauthenticated_user
 from .forms import CreateUserForm
+from .utils import email_verification_token
 
 
-def register_user(request):
-    form = CreateUserForm()
+class RegisterView(FormView):
+    form_class = CreateUserForm
+    template_name = "register.html"
+    success_url = reverse_lazy("login")
 
-    if request == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterView, self).form_valid(form)
 
-    context = {'form': form}
+    def _send_email_verification(self, user):
+        current_site = get_current_site(self.request)
+        subject = "Activate your account"
+        body = render_to_string(
 
-    return render(request, 'register.html', context=context)
+        )
 
 
 @unauthenticated_user
