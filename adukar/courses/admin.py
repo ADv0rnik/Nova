@@ -11,7 +11,7 @@ class ModuleInLine(admin.TabularInline):
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [ModuleInLine]
-    search_fields = ['title']
+    search_fields = ["title"]
     list_display = ("__str__", "created_at", "category")
     readonly_fields = ("created_at",)
     prepopulated_fields = {"slug": ("title",)}
