@@ -19,5 +19,8 @@ class Profile(models.Model):
     def __str__(self):
         return f"Profile: {self.pk} {self.first_name} {self.last_name}"
 
+    def get_courses(self):
+        return self.courses_set.all()
+
     class Meta:
         verbose_name_plural = _("Profiles")
