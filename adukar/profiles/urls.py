@@ -7,5 +7,5 @@ from .views import RegisterView, login_user, ActivateView
 urlpatterns = [
     re_path("^login/", login_user, name="login"),
     path("register/", RegisterView.as_view(), name="register"),
-    path('activate/<uidb64>/<token>', ActivateView.as_view(), name='activate'),
+    path("activate/<uidb64>/<token>", ActivateView.as_view(), name="activate"),
 ]

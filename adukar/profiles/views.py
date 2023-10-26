@@ -32,9 +32,8 @@ class RegisterView(FormView):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-
-            name = form.cleaned_data['first_name']
-            email = form.cleaned_data['email']
+            name = form.cleaned_data["first_name"]
+            email = form.cleaned_data["email"]
             user = form.save(commit=False)
             user.is_active = False
             user.set_unusable_password()
@@ -45,25 +44,28 @@ class RegisterView(FormView):
         else:
             logger.debug(
                 "Invalid form",
-                extra={"event_name": "register_view", "event_source": logger.event_source},
+                extra={
+                    "event_name": "register_view",
+                    "event_source": logger.event_source,
+                },
             )
             form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {"form": form})
 
     def send_email(self, user, **kwargs):
         current_site = get_current_site(self.request)
-        contact_username = kwargs.get('name')
-        contact_email = kwargs.get('email')
-        subject = f'Greetings from adukar'
-        message = f'Dear {contact_username}. Please activate your account'
+        contact_username = kwargs.get("name")
+        contact_email = kwargs.get("email")
+        subject = f"Greetings from adukar"
+        message = f"Dear {contact_username}. Please activate your account"
         body = render_to_string(
-            'email_verification.html',
+            "email_verification.html",
             {
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': email_verification_token.make_token(user),
-                'message': message
-            }
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": email_verification_token.make_token(user),
+                "message": message,
+            },
         )
         EmailMessage(
             subject=subject,
@@ -74,13 +76,11 @@ class RegisterView(FormView):
 
 
 class ActivateView(View):
-
     def get_user_from_email_verification_token(self, token: str):
         try:
             uid = force_str(urlsafe_base64_decode(self))
             user = get_user_model().objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError,
-                get_user_model().DoesNotExist):
+        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
             return None
 
         if user is not None and email_verification_token.check_token(user, token):
@@ -92,7 +92,7 @@ class ActivateView(View):
         user.is_active = True
         user.save()
         login(request, user)
-        return redirect('registration_successful')
+        return redirect("registration_successful")
 
 
 @unauthenticated_user
