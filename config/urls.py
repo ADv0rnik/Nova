@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django_email_verification import urls as email_urls
 
 from courses.views import index
 
@@ -10,6 +11,7 @@ urlpatterns = [
     path('', index, name='home'),
     path('admin/', admin.site.urls),
     path('', include('profiles.urls')),
+    path('', include(email_urls)),
     path('courses/', include('courses.urls'))
 ]
 

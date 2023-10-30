@@ -8,7 +8,7 @@ from .log_settings import ApplicationJSONFormatter
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
+DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
@@ -98,6 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -140,7 +141,7 @@ LOGGING = {
         }
     },
     "loggers": {
-        "adukar": {
+        "asnova": {
             "handlers": ["console", "file"],
             "level": "DEBUG"
         }
@@ -156,9 +157,25 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
 }
 
+
+def verified_callback(user):
+    user.is_active = True
+
+
+EMAIL_MAIL_CALLBACK = verified_callback
+
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_USE_SSL = config('EMAIL_USE_SSL')
 EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_FROM_ADDRESS = config('EMAIL_FROM_ADDRESS')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT')
+
+EMAIL_MAIL_SUBJECT = 'Confirm your email'
+EMAIL_MAIL_HTML = 'email_body.html'
+EMAIL_MAIL_PLAIN = 'email_body.txt'
+EMAIL_MAIL_TOKEN_LIFE = 60 * 60
+EMAIL_MAIL_PAGE_TEMPLATE = 'confirm.html'
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000'
+EMAIL_MULTI_USER = True
