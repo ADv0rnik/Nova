@@ -3,7 +3,7 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Adukar</title>
+    <title>Asveta Nova</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
@@ -25,8 +25,8 @@
                 </a>
             </div>
             <div class="text-end">
-                <button type="button" class="btn-outline">Sign In</button>
-                <button type="button" class="btn-signup">Sign Up</button>
+                <button type="button" onclick="window.location.href={% url 'login' %}" class="btn-outline">Sign In</button>
+                <button type="button" onclick="window.location.href={% url 'register' %}" class="btn-signup">Sign Up</button>
             </div>
         </div>
         <div class="content">

@@ -2,10 +2,18 @@
     <title>Email confirmation</title>
 {% endblock title %}
 
-{% block content %}
+<div class="info">
+    <script>
+       setTimeout(function(){
+            window.location.href = "{% url 'home' %}";
+         }, 5000);
+    </script>
+
+    {% block content %}
     {% if success %}
         {{ user.username }}, your account is confirmed!
     {% else %}
         Error, invalid token!
     {% endif %}
 {% endblock content %}
+</div>
