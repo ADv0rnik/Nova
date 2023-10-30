@@ -6,7 +6,7 @@ BGreen='\033[1;32m'
 cd ..
 src_dir=$(pwd)
 
-black "$src_dir"/adukar/courses
+black "$src_dir"/courses
 
 
 # shellcheck disable=SC1072
@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-black "$src_dir"/adukar/profiles
+black "$src_dir"/profiles
 
 # shellcheck disable=SC1072
 # shellcheck disable=SC1073
