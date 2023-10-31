@@ -1,8 +1,8 @@
 import logging
 
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import FormView
@@ -43,6 +43,7 @@ class RegisterView(FormView):
 
 @unauthenticated_user
 def login_user(request):
+    print(request.user.is_authenticated)
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -53,3 +54,12 @@ def login_user(request):
         else:
             messages.info(request, "Username or password do not match")
     return render(request, "login.html")
+
+
+def logout_user(request):
+    logout(request)
+    return render(request, 'home.html')
+
+
+# TODO: Реализовать функционал редиректа на страницу профиля после регистрации,
+#  т.к. аутентификация происходит автоматически.
