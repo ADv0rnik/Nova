@@ -1,11 +1,17 @@
+import logging
+
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User, Group
 from .models import Profile
 from django.dispatch import receiver
 
 
+logger = logging.getLogger("asnova")
+logger.event_source = __name__
+
+
 @receiver(post_save, sender=User)
-def create_student_profile(sender, instance, created, **kwargs):
+def create_profile(sender, instance, created, **kwargs):
     if created:
         # group_name = Group.objects.get(name='student')
         # instance.groups.add(group_name)
@@ -13,6 +19,11 @@ def create_student_profile(sender, instance, created, **kwargs):
             user=instance,
             first_name=instance.first_name,
             last_name=instance.last_name,
-            mail=instance.email,
         )
-        print("Profile created!")
+        logger.info(
+            f"Profile created for {instance.username}",
+            extra={
+                "event_name": "create_profile",
+                "event_source": logger.event_source,
+            },
+        )
