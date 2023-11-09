@@ -22,10 +22,10 @@ class Category(models.Model):
 class Course(models.Model):
     title = models.CharField(_("Title"), max_length=255)
     num_lessons = models.IntegerField(_("Number Of Lessons"), default=0)
-    description = models.TextField(
-        _("Description"), null=True, blank=True
+    description = models.TextField(_("Description"), null=True, blank=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="course_category"
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="course_category")
     image = models.ImageField(_("Image"), default="default.png", upload_to="course/")
     ranking = models.DecimalField(
         _("Ranking"), max_digits=3, decimal_places=2, default=0
@@ -57,10 +57,14 @@ class Module(models.Model):
         max_length=255,
     )
     nm_exercises = models.IntegerField(_("Number Of Exercises"), default=0)
-    image = models.ImageField(_("Image"), default="default.png", null=True, blank=True, upload_to="modules/%Y/%m/%d")
-    description = models.TextField(
-        _("Description"), null=True, blank=True
+    image = models.ImageField(
+        _("Image"),
+        default="default.png",
+        null=True,
+        blank=True,
+        upload_to="modules/%Y/%m/%d",
     )
+    description = models.TextField(_("Description"), null=True, blank=True)
     content = tinymce_model.HTMLField(null=True, blank=True)
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
@@ -88,9 +92,7 @@ class Exercise(models.Model):
         _("Title"),
         max_length=255,
     )
-    description = models.TextField(
-        _("Description"), null=True, blank=True
-    )
+    description = models.TextField(_("Description"), null=True, blank=True)
     ex_type = models.CharField(_("Type Of Exercise"), choices=EXERCISE_TYPE)
     points = models.IntegerField(_("Points"), default=0)
     slug = models.SlugField(
