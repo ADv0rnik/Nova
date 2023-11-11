@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name="course",
-            name="images",
+            name="image",
             field=models.ImageField(
                 default="default.png", upload_to="course/", verbose_name="Image"
             ),
@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name="module",
-            name="images",
+            name="image",
             field=models.ImageField(
                 blank=True,
                 default="default.png",

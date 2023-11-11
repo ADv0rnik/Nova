@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 from tinymce import models as tinymce_model
 from django.utils.translation import gettext_lazy as _
@@ -81,6 +82,11 @@ class Module(models.Model):
     def get_exercise(self):
         return self.exercise_set.all()
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.title)
+        super(Module, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = "Module"
         verbose_name_plural = "Modules"
@@ -109,3 +115,6 @@ class Exercise(models.Model):
 
     class Meta:
         verbose_name_plural = "Exercises"
+
+
+# TODO: Delete image when deleting object

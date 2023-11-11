@@ -21,7 +21,10 @@ class CourseAdmin(admin.ModelAdmin):
     inlines = [ModuleInLine]
     search_fields = ["title"]
     list_display = ("__str__", "created_at", "category")
-    readonly_fields = ("created_at", "get_image",)
+    readonly_fields = (
+        "created_at",
+        "get_image",
+    )
     prepopulated_fields = {"slug": ("title",)}
 
     def get_image(self, obj):
@@ -44,7 +47,7 @@ class ModuleAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url}> width="110" height="100">')
+        return mark_safe(f'<img src={obj.image.url} width="110" height="100">')
 
     get_image.short_description = "Image"
 
