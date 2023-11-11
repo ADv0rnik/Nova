@@ -1,21 +1,33 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
-from django.utils import timezone
+from tinymce import models as tinymce_model
 from django.utils.translation import gettext_lazy as _
 
-
-CAT_CHOICE = [("life", "life"), ("computer", "computer")]
 
 EXERCISE_TYPE = [("watch", "watch"), ("read", "read"), ("quiz", "quiz")]
 
 
+class Category(models.Model):
+    name = models.CharField(_("Category name"), max_length=100)
+    slug = models.SlugField(unique=True, verbose_name="URL")
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+
 class Course(models.Model):
-    title = models.CharField(_("Title"), max_length=250)
+    title = models.CharField(_("Title"), max_length=255)
     num_lessons = models.IntegerField(_("Number Of Lessons"), default=0)
-    description = models.TextField(
-        _("Description"), max_length=250, null=True, blank=True
+    description = models.TextField(_("Description"), null=True, blank=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="course_category"
     )
-    category = models.CharField(_("Category"), choices=CAT_CHOICE, max_length=100)
+    image = models.ImageField(_("Image"), default="default.png", upload_to="course/")
     ranking = models.DecimalField(
         _("Ranking"), max_digits=3, decimal_places=2, default=0
     )
@@ -35,6 +47,7 @@ class Course(models.Model):
         return self.module_set.all()
 
     class Meta:
+        verbose_name = "Course"
         verbose_name_plural = "Courses"
 
 
@@ -45,8 +58,15 @@ class Module(models.Model):
         max_length=255,
     )
     nm_exercises = models.IntegerField(_("Number Of Exercises"), default=0)
-    image = models.ImageField(_("Image"), default="default.png", null=True, blank=True)
-    overview = models.TextField(_("Overview"), blank=True, null=True)
+    image = models.ImageField(
+        _("Image"),
+        default="default.png",
+        null=True,
+        blank=True,
+        upload_to="modules/%Y/%m/%d",
+    )
+    description = models.TextField(_("Description"), null=True, blank=True)
+    content = tinymce_model.HTMLField(null=True, blank=True)
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
     )
@@ -62,7 +82,13 @@ class Module(models.Model):
     def get_exercise(self):
         return self.exercise_set.all()
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.title)
+        super(Module, self).save(*args, **kwargs)
+
     class Meta:
+        verbose_name = "Module"
         verbose_name_plural = "Modules"
 
 
@@ -72,9 +98,7 @@ class Exercise(models.Model):
         _("Title"),
         max_length=255,
     )
-    description = models.TextField(
-        _("Description"), max_length=250, null=True, blank=True
-    )
+    description = models.TextField(_("Description"), null=True, blank=True)
     ex_type = models.CharField(_("Type Of Exercise"), choices=EXERCISE_TYPE)
     points = models.IntegerField(_("Points"), default=0)
     slug = models.SlugField(
@@ -91,3 +115,6 @@ class Exercise(models.Model):
 
     class Meta:
         verbose_name_plural = "Exercises"
+
+
+# TODO: Delete image when deleting object
