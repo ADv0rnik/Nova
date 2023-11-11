@@ -19,6 +19,7 @@ def create_profile(sender, instance, created, **kwargs):
             user=instance,
             first_name=instance.first_name,
             last_name=instance.last_name,
+            email=instance.email,
         )
         logger.info(
             f"Profile created for {instance.username}",
