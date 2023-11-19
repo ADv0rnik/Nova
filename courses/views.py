@@ -15,10 +15,6 @@ class CoursesView(ListView):
     template_name = "courses.html"
     queryset = Course.objects.all()
     context_object_name = "courses"
-    # logger.debug(
-    #     "start application",
-    #     extra={"event_name": "courses_view", "event_source": logger.event_source},
-    # )
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

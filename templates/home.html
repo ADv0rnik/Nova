@@ -4,12 +4,11 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>Asveta Nova</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
 <body>
-    <div class="banner">
-        <img class="bg-image" src="{% static 'image/bg-image.jpg' %}" alt="bg-img">
+    <header class="header">
         <div class="navbar">
             <img class="logo" src="{% static 'image/asnova.png' %}" alt="logo">
             <ul>
@@ -29,12 +28,62 @@
                 <button type="button" onclick="window.location.href={% url 'register' %}" class="btn-signup">Sign Up</button>
             </div>
         </div>
-        <div class="content">
+    </header>
+    <div class="banner">
+        <img class="bg-image" src="{% static 'image/bg-image.jpg' %}" alt="bg-img">
+        <div class="banner-content">
             <h1>Вучыся на роднай мове</h1>
+            <p>Шукай бясплатныя курсы на беларускай мове па біялогіі, хіміі, інфарматыке і іншых навуках</p>
             <div>
                 <button type="button">Даведайся больш</button>
             </div>
         </div>
+    </div>
+    <div class="content">
+        <div class="content-wrapper">
+            <div class="title">
+                <h1>What do we offer</h1>
+                <p>We are currently offering all of our programs both virtually and in-studio!</p>
+            </div>
+            <div class="cards">
+                <div class="card" id="1">
+                    <img src="{% static 'image/act1.jpg' %}">
+                    <div class="info">
+                        <p class="">One on one tutoring is the most effective and intensive way to get up to speed,
+                            build confidence, and start seeing results! Most students book consistent weekly sessions
+                            for the entire year with a tutor they love. Others simply book when they need help. Whenever
+                            you need us, we're here for you!&nbsp
+                        </p>
+                    </div>
+                    <div class="price"><b>Rate: $80/hour</b></div>
+                </div>
+                <div class="card" id="2">
+                    <img src="{% static 'image/act2.jpg' %}">
+                    <div class="info">
+                        <p class="">There is so much more to mastering math and science than just curriculum content.
+                            That's why we're always hosting workshops covering topics like study skills, exam strategies,
+                            and overcoming math anxiety. If you've got something you'd like us to cover - let us know!
+                            Otherwise, click below for a list of upcoming workshops you can sign up for!&nbsp
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <footer class="footer-distributed">
+            <div class="footer-left">
+                <p class="footer-links">
+                    <a class="link-1" href="#">Home</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">About</a>
+                    <a href="#">Faq</a>
+                    <a href="#">Contact</a>
+                </p>
+                <p>ASNOVA &copy; 2023</p>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

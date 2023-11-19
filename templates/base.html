@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Asveta Nova</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body>
+    <header class="header">
+        <div class="navbar">
+            <img class="logo" src="{% static 'image/asnova.png' %}" alt="logo">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Catalog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <div class="search-box" role="search">
+                <input type="search" placeholder="Search...">
+                <a href="#">
+                    <i class="uil uil-search"></i>
+                </a>
+            </div>
+            <div class="text-end">
+                <button type="button" onclick="window.location.href={% url 'login' %}" class="btn-outline">Sign In</button>
+                <button type="button" onclick="window.location.href={% url 'register' %}" class="btn-signup">Sign Up</button>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By: Mahesh
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
