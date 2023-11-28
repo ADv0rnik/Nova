@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_email_verification',
+    'django_extensions',
 
     'debug_toolbar',
     'tinymce',
