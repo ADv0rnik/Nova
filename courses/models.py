@@ -52,7 +52,9 @@ class Course(models.Model):
 
 
 class Module(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course_module")
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="course_module"
+    )
     title = models.CharField(
         _("Title"),
         max_length=255,
@@ -90,11 +92,13 @@ class Module(models.Model):
     class Meta:
         verbose_name = "Module"
         verbose_name_plural = "Modules"
-        ordering = ['course']
+        ordering = ["course"]
 
 
 class Exercise(models.Model):
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name="exercise_module")
+    module = models.ForeignKey(
+        Module, on_delete=models.CASCADE, related_name="exercise_module"
+    )
     title = models.CharField(
         _("Title"),
         max_length=255,
