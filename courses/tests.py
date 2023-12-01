@@ -10,7 +10,7 @@ def use_dummy_cache_backend(settings):
     settings.DEBUG = True
     settings.CACHES = {
         "default": {
-            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+            "ENGINE": "django.db.backends.postgresql",
         }
     }
 
