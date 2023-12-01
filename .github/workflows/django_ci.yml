@@ -1,16 +1,9 @@
 name: Django CI
-env:
-  SECRET_KEY: "31$4q&8(be8g1tzflg5gs-l-etav2v9#bdovky1*$j7+_7scjn"
-  DEBUG: True
-  TIME_ZONE: "Europe/Minsk"
-  ENGINE: "django.db.backends.postgresql"
-  NAME: "postgres"
-  USER: "postgres"
-  PASSWORD: "postgres"
-  HOST: "localhost"
-  PORT: 5432
 on:
-  workflow_dispatch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master", "dev" ]
 
 jobs:
   build:
@@ -19,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.11"]
 
     steps:
     - uses: actions/checkout@v3
