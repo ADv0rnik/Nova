@@ -1,11 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
-
+<style>
+  .banner-image {
+    background-image: url('{% static 'image/bg-image-courses.jpg' %}');
+    background-size: cover;
+    filter: brightness(0.5);
+  }
+</style>
+<div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center"></div>
+<div class="banner-content">
+        <h1 class="fw-light">Discover our courses</h1>
+        <p>Checkout our new courses on biology, chemistry, computer science etc. Start your journey by signing in.
+          If you don't have an account please sign up to get one for free
+        </p>
+        <div>
+            <button type="button" onclick="window.location.href={% url 'register' %}">Sign Up</button>
+        </div>
+    </div>
 {% for course in courses %}
-<div class="content-card">
-  <p>Card content</p>
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col-sm">
+                <div class="card">
+                    <img src="{{ course.image.url }}" width="100%" height="100%"
+                         style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                    <div class="card-body">
+                        <h4>{{course.title}}  <span class="badge" style="background: green; font-size: 10px">{{ course.category.name }}</span></h4>
+                        <p class="card-text">{{course.description|truncatechars:150}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <small class="text-muted">{{course.num_lessons}} modules</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endfor %}
 {% endblock %}
