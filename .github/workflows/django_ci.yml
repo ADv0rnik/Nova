@@ -10,10 +10,7 @@ env:
   HOST: "localhost"
   PORT: 5432
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master", "dev" ]
+  workflow_dispatch
 
 jobs:
   build:
