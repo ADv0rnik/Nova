@@ -6,6 +6,7 @@ from courses.models import Category, Course
 
 @pytest.fixture(autouse=True)
 def use_dummy_cache_backend(settings):
+    settings.SECRET_KEY = "748_59$9-hx*o5klljprr)3y^9=q@5#+i97zm2)&eo#8+mhf_s"
     settings.DEBUG = True
 
 
