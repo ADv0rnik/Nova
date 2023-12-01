@@ -8,6 +8,11 @@ from courses.models import Category, Course
 def use_dummy_cache_backend(settings):
     settings.SECRET_KEY = "748_59$9-hx*o5klljprr)3y^9=q@5#+i97zm2)&eo#8+mhf_s"
     settings.DEBUG = True
+    settings.CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        }
+    }
 
 
 class CategoryTestCase(TestCase):
