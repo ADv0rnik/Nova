@@ -71,11 +71,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "github_actions",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "127.0.0.1",
-        "PORT": 5432,
+        "PORT": "5432",
     }
 }
 
@@ -124,42 +124,4 @@ def show_toolbar(request):
 
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
-}
-
-
-def verified_callback(user):
-    user.is_active = True
-
-
-EMAIL_MAIL_CALLBACK = verified_callback
-
-EMAIL_BACKEND = config('EMAIL_BACKEND')
-EMAIL_USE_SSL = config('EMAIL_USE_SSL')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_FROM_ADDRESS = config('EMAIL_FROM_ADDRESS')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT')
-
-EMAIL_MAIL_SUBJECT = 'Confirm your email'
-EMAIL_MAIL_HTML = 'email_body.html'
-EMAIL_MAIL_PLAIN = 'email_body.txt'
-EMAIL_MAIL_TOKEN_LIFE = 60 * 60
-EMAIL_MAIL_PAGE_TEMPLATE = 'confirm.html'
-EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000'
-EMAIL_MULTI_USER = True
-
-TINYMCE_DEFAULT_CONFIG = {
-    "height": "320px",
-    "width": "960px",
-    "menubar": "file edit view insert format tools table help",
-    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
-    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
-    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
-    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
-    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
-    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
-    "a11ycheck ltr rtl | showcomments addcomment code",
-    "custom_undo_redo_levels": 10,
-    "language": "en_EN",
 }
