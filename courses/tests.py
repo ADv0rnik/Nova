@@ -6,7 +6,18 @@ from courses.models import Category, Course
 
 @pytest.fixture(autouse=True)
 def use_dummy_cache_backend(settings):
+    settings.SECRET_KEY = "748_59$9-hx*o5klljprr)3y^9=q@5#+i97zm2)&eo#8+mhf_s"
     settings.DEBUG = True
+    settings.DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "postgres",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "localhost",
+            "PORT": 5432,
+        }
+    }
 
 
 class CategoryTestCase(TestCase):
