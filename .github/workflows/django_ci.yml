@@ -2,13 +2,13 @@ name: Django CI
 env:
   SECRET_KEY: "31$4q&8(be8g1tzflg5gs-l-etav2v9#bdovky1*$j7+_7scjn"
   DEBUG: True
-  TIME_ZONE: 'Europe/Minsk'
-  ENGINE: "django.db.backends.postgresql",
-  NAME: "postgres",
-  USER: "postgres",
-  PASSWORD: "postgres",
-  HOST: "localhost",
-  PORT: 5432,
+  TIME_ZONE: "Europe/Minsk"
+  ENGINE: "django.db.backends.postgresql"
+  NAME: "postgres"
+  USER: "postgres"
+  PASSWORD: "postgres"
+  HOST: "localhost"
+  PORT: 5432
 on:
   push:
     branches: [ "master" ]
