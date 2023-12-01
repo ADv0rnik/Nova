@@ -13,7 +13,7 @@ logger.event_source = __name__
 class CoursesView(ListView):
     model = Course
     template_name = "courses.html"
-    queryset = Course.objects.defer('created_at', 'updated_at').prefetch_related
+    queryset = Course.objects.defer("created_at", "updated_at").prefetch_related
     context_object_name = "courses"
 
     def get_context_data(self, *, object_list=None, **kwargs):

@@ -10,7 +10,6 @@ def use_dummy_cache_backend(settings):
 
 
 class CategoryTestCase(TestCase):
-
     @pytest.mark.django_db
     def setUp(self) -> None:
         self.client = Client()
@@ -24,14 +23,11 @@ class CategoryTestCase(TestCase):
 
 
 class CourseTestCase(TestCase):
-
     def setUp(self):
         self.client = Client()
         self.category = Category.objects.create(name="Biology", slug="biology")
         self.course = Course.objects.create(
-            title="Cell biology",
-            num_lessons=10,
-            category=self.category
+            title="Cell biology", num_lessons=10, category=self.category
         )
 
     def test_course_title(self):
@@ -41,10 +37,10 @@ class CourseTestCase(TestCase):
         return self.assertEqual(self.course.category.name, self.category.name)
 
     def test_str_call(self):
-        return self.assertEqual(self.course.__str__(), f"{self.course.pk} - {self.course.title}")
+        return self.assertEqual(
+            self.course.__str__(), f"{self.course.pk} - {self.course.title}"
+        )
 
     def test_request(self):
         resp = self.client.get("/courses")
         return self.assertEqual(resp.status_code, 301)
-
-
