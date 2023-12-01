@@ -43,7 +43,6 @@ class RegisterView(FormView):
 
 @unauthenticated_user
 def login_user(request):
-    print(request.user.is_authenticated)
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")

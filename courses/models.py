@@ -1,3 +1,5 @@
+from PIL import Image
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
@@ -46,13 +48,23 @@ class Course(models.Model):
     def get_module(self):
         return self.module_set.all()
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (400, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
     class Meta:
         verbose_name = "Course"
         verbose_name_plural = "Courses"
 
 
 class Module(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="course_module"
+    )
     title = models.CharField(
         _("Title"),
         max_length=255,
@@ -90,10 +102,13 @@ class Module(models.Model):
     class Meta:
         verbose_name = "Module"
         verbose_name_plural = "Modules"
+        ordering = ["course"]
 
 
 class Exercise(models.Model):
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    module = models.ForeignKey(
+        Module, on_delete=models.CASCADE, related_name="exercise_module"
+    )
     title = models.CharField(
         _("Title"),
         max_length=255,

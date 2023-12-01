@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class ModuleInLine(admin.TabularInline):
     model = Module
-    fields = ("title", "nm_exercises", "created_at")
+    fields = ("title", "nm_exercises")
     readonly_fields = ("created_at",)
 
 
