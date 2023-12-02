@@ -5,3 +5,5 @@
 > sign up page 31.10.2023
 
 > homepage created 27.11.2023
+
+> tests created for course and profiles app 03.12.2023 
