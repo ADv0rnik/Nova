@@ -1,4 +1,5 @@
 import logging
+from functools import lru_cache
 
 from django.shortcuts import render
 from django.views.generic import ListView
@@ -22,5 +23,6 @@ class CoursesView(ListView):
         return context
 
 
+@lru_cache()
 def index(request):
     return render(request, "home.html")
