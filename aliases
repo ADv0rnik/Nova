@@ -1,0 +1,2 @@
+alias run_nova='docker compose up --build -d'
+alias load_data='bash load_data.sh'
