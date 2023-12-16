@@ -2,9 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from config.settings.settings_dev import BASE_DIR
 
-print(BASE_DIR)
 
 def main():
     """Run administrative tasks."""
