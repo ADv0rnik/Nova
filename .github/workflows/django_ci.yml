@@ -34,6 +34,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements/dev.txt
         mkdir logs
+        python manage.py collectstatic
     - name: Run Tests
       run: |
         pytest
