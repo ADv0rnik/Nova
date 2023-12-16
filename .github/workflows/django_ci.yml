@@ -32,7 +32,8 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        cd requirements
+        pip install -r dev.txt
         mkdir logs
     - name: Run Tests
       run: |

@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 
 class ProfileTestCase(TestCase):
-
     @pytest.mark.django_db
     def setUp(self):
         self.client = Client()
