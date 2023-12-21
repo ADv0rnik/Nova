@@ -114,7 +114,11 @@ class Exercise(models.Model):
         max_length=255,
     )
     description = models.TextField(_("Description"), null=True, blank=True)
-    ex_type = models.CharField(_("Type Of Exercise"), choices=EXERCISE_TYPE)
+    ex_type = models.CharField(
+        _("Type Of Exercise"),
+        choices=EXERCISE_TYPE,
+        max_length=20
+    )
     points = models.IntegerField(_("Points"), default=0)
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
@@ -130,6 +134,3 @@ class Exercise(models.Model):
 
     class Meta:
         verbose_name_plural = "Exercises"
-
-
-# TODO: Delete image when deleting object
