@@ -155,6 +155,7 @@ class Migration(migrations.Migration):
                             ("quiz", "quiz"),
                         ],
                         verbose_name="Type Of Exercise",
+                        max_length=20,
                     ),
                 ),
                 ("points", models.IntegerField(default=0, verbose_name="Points")),
