@@ -1,9 +1,47 @@
-name: CD to GC
+name: Deploy to devzone
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "dev-zone" ]
+  pull_request:
+    branches: [ "dev-zone" ]
+env:
+  SECRET_KEY: "e18@i)!069iyy9=!%$alievfru++$ejmykc7$9_g0qw+ks&@a3"
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements/dev.txt
+        mkdir logs
+        python manage.py collectstatic
+    - name: Run Tests
+      run: |
+        pytest
+  deploy:
+    runs-on: ubuntu-latest
+    environment: devzone
     steps:
       - uses: actions/checkout@v3
       - name: executing remote ssh commands using ssh key
