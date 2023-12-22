@@ -1,5 +1,7 @@
 name: CD to GC
-on: workflow_dispatch
+on:
+  push:
+    branches: [ "dev-zone" ]
 jobs:
   build:
     runs-on: ubuntu-latest
