@@ -115,9 +115,7 @@ class Exercise(models.Model):
     )
     description = models.TextField(_("Description"), null=True, blank=True)
     ex_type = models.CharField(
-        _("Type Of Exercise"),
-        choices=EXERCISE_TYPE,
-        max_length=20
+        _("Type Of Exercise"), choices=EXERCISE_TYPE, max_length=20
     )
     points = models.IntegerField(_("Points"), default=0)
     slug = models.SlugField(
