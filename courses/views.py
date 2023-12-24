@@ -20,6 +20,7 @@ class CoursesView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Courses list"
+        context["course_num"] = Course.objects.count()
         return context
 
 
