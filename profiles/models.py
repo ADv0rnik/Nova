@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from courses.models import Module
+from courses.models import Module, Course
 
 
 class Profile(models.Model):
@@ -49,3 +49,22 @@ class ModuleResults(models.Model):
     class Meta:
         verbose_name = _("Module Result")
         verbose_name_plural = _("Module Results")
+
+
+class CourseResults(models.Model):
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE
+    )
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="course_results"
+    )
+    passed = models.BooleanField(
+        _("Passed"), default=False, help_text="the result of module taken"
+    )
+
+    def __str__(self):
+        return f"{self.course}: {self.passed}"
+
+    class Meta:
+        verbose_name = _("Course result")
+        verbose_name_plural = _("Course results")

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, ModuleResults
+from .models import Profile, ModuleResults, CourseResults
 
 
 class ModuleResultsInline(admin.TabularInline):
@@ -16,3 +16,4 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ModuleResults)
+admin.site.register(CourseResults)
