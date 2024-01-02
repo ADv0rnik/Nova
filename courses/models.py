@@ -7,7 +7,14 @@ from tinymce import models as tinymce_model
 from django.utils.translation import gettext_lazy as _
 
 
-EXERCISE_TYPE = [("watch", "watch"), ("read", "read"), ("quiz", "quiz")]
+class ExerciseType(models.Model):
+    name = models.CharField(_("Type name"), max_length=20, null=False)
+
+    def __str__(self):
+        return f"{self.pk} - {self.name}"
+
+    class Meta:
+        verbose_name_plural = _("Exercise types")
 
 
 class Category(models.Model):
@@ -45,9 +52,6 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse("course", kwargs={"course_slug": self.slug})
 
-    def get_module(self):
-        return self.module_set.all()
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
@@ -78,7 +82,6 @@ class Module(models.Model):
         upload_to="modules/%Y/%m/%d",
     )
     description = models.TextField(_("Description"), null=True, blank=True)
-    content = tinymce_model.HTMLField(null=True, blank=True)
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
     )
@@ -92,7 +95,13 @@ class Module(models.Model):
         return reverse("module", kwargs={"module_slug": self.slug})
 
     def get_exercise(self):
-        return self.exercise_set.all()
+        return self.exercise_module.all()
+
+    @property
+    def total_score(self):
+        exercises = self.get_exercise()
+        total_score = sum([exercise.points for exercise in exercises])
+        return total_score
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -100,8 +109,8 @@ class Module(models.Model):
         super(Module, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "Module"
-        verbose_name_plural = "Modules"
+        verbose_name = _("Module")
+        verbose_name_plural = _("Modules")
         ordering = ["course"]
 
 
@@ -113,10 +122,8 @@ class Exercise(models.Model):
         _("Title"),
         max_length=255,
     )
-    description = models.TextField(_("Description"), null=True, blank=True)
-    ex_type = models.CharField(
-        _("Type Of Exercise"), choices=EXERCISE_TYPE, max_length=20
-    )
+    content = tinymce_model.HTMLField(_("Content"), null=True, blank=True)
+    ex_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
     points = models.IntegerField(_("Points"), default=0)
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
@@ -131,4 +138,5 @@ class Exercise(models.Model):
         return reverse("exercise", kwargs={"exercise_slug": self.slug})
 
     class Meta:
-        verbose_name_plural = "Exercises"
+        verbose_name = _("Exercise")
+        verbose_name_plural = _("Exercises")

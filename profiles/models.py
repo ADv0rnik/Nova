@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from courses.models import Module
+
 
 class Profile(models.Model):
     user = models.ForeignKey(User, verbose_name=_("user"), on_delete=models.CASCADE)
@@ -24,10 +26,26 @@ class Profile(models.Model):
     def __str__(self):
         return f"Profile: {self.pk} {self.first_name} {self.last_name}"
 
-    def get_courses(self):
-        return self.courses_set.all()
-
     class Meta:
         verbose_name = _("Profile")
         verbose_name_plural = _("Profiles")
         ordering = ["last_name"]
+
+
+class ModuleResults(models.Model):
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name="results")
+    score = models.DecimalField(_("Score"), max_digits=3, decimal_places=2, default=0)
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="module_results"
+    )
+    passed = models.BooleanField(
+        _("Passed"), default=False, help_text="the result of module taken"
+    )
+    created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.pk} - {self.module}: {self.passed}"
+
+    class Meta:
+        verbose_name = _("Module Result")
+        verbose_name_plural = _("Module Results")

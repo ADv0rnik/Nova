@@ -1,9 +1,18 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, ModuleResults
 
 
-# class ProfileAdmin(admin.ModelAdmin):
-#     model = Profile
+class ModuleResultsInline(admin.TabularInline):
+    model = ModuleResults
+    list_display = ("__str__", "score", "created_at")
+    readonly_fields = ("created_at",)
 
 
-admin.site.register(Profile)
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("__str__", "email", "is_teacher")
+    inlines = [ModuleResultsInline]
+    readonly_fields = ("created_at", "updated_at")
+
+
+admin.site.register(ModuleResults)
