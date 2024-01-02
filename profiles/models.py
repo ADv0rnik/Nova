@@ -52,9 +52,7 @@ class ModuleResults(models.Model):
 
 
 class CourseResults(models.Model):
-    course = models.ForeignKey(
-        Course, on_delete=models.CASCADE
-    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="course_results"
     )
