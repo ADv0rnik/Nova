@@ -38,6 +38,20 @@ services:
       - db
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+#  app:
+#    container_name: nova
+#    build:
+#      dockerfile: Dockerfile
+#    env_file:
+#      - .env
+#    ports:
+#      - 8000:8000
+#    depends_on:
+#      - db
+#      - redis
+#    restart: always
+#    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
 
 volumes:
   postgres-data:

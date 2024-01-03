@@ -24,7 +24,6 @@ class CategoryTestCase(TestCase):
 
 
 class CourseTestCase(TestCase):
-
     @pytest.mark.django_db
     def setUp(self):
         self.client = Client()
