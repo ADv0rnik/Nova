@@ -6,12 +6,11 @@
 <style>
 
     ion-icon {
-      font-size: 14px;
+      font-size: 16px;
     }
 
     .nav-course-title {
       text-align: center;
-      font-family: "Roboto";
       font-style: normal;
       font-weight: 400;
       font-display: swap;
@@ -19,11 +18,7 @@
     }
 
     .nav-course-info {
-      font-family: "Roboto";
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      font-size: 12px;
+      font-size: 16px;
     }
 
     .nav-link {
@@ -48,20 +43,18 @@
     }
 
     .content {
-      font-family: "Roboto";
       font-style: normal;
-      font-weight: 400;
-      font-display: swap;
+      font-size: 16px;
     }
 
 </style>
 <div class="container-fluid">
     <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3 sidebar-sticky">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse py-3" style="height: 100vh;">
+            <div class="position-sticky pt-3 sidebar-sticky my-5">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <div class="nav-course-title py-2 mx-3">
+                        <div class="nav-course-title mx-3 my-3">
                             <b>{{ course.title }}</b>
                         </div>
                     </li>
@@ -76,7 +69,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <div id="3" class="nav-course-info mx-3">
+                        <div class="nav-course-info mx-3">
                             <p>Rate: <b>4.5</b></p>
                         </div>
                     </li>
@@ -89,7 +82,7 @@
                     </li>
                 </ul>
                 <hr>
-                <ul class="nav flex-column mb-2">
+                <ul class="nav flex-column mb-2 pb-5">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <ion-icon name="information-circle-outline"></ion-icon>
@@ -108,36 +101,11 @@
                             Add to favourites
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
-                    <li class="nav-item">
-                        <p></p>
-                    </li>
                 </ul>
             </div>
-            <hr>
         </nav>
-        <div class="content col-md-9 ms-sm-auto col-lg-10 px-md-4 py-mx-2 bg-light">
-            <div class="title pt-2 mx-3 my-3">
+        <div class="content col-md-9 ms-sm-auto col-lg-10 px-md-4 py-mx-2 mt-5 bg-light">
+            <div class="title mx-3 mb-3 mt-5">
                 <h4><b>Information</b></h4>
             </div>
             <div class="panel-info py-2 mx-3">
@@ -150,7 +118,7 @@
                         <button data-bs-toggle="collapse" data-bs-target="#{{ module.id }}" class="accordion-button" type="button">{{ module.title }}</button>
                     </h2>
                     <div id="{{ module.id }}" class="accordion-collapse collapse">
-                        <div class="accordion-body" style="font-size: 12px;">
+                        <div class="accordion-body" style="font-size: 14px;">
                             <p>{{ module.description }}</p>
                             <p>Number of exercise: {{ module.nm_exercises }}</p>
                         </div>
