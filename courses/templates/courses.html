@@ -4,27 +4,74 @@
 
 {% block content %}
 <style>
-  .banner-image {
-    background-image: url('{% static 'image/bg-image-courses.jpg' %}');
-    background-size: cover;
-    filter: brightness(0.5);
-  }
+    .banner-image {
+        background-image: url('{% static 'image/bg-image-courses.jpg' %}');
+        background-size: cover;
+        filter: brightness(0.5);
+    }
+
+    form {
+        justify-content: center;
+    }
+
+    .form-control {
+        width: 500px;
+        height: 50px;
+        border-radius: 5px;
+    }
+
+    button.btn-search {
+        height: 50px;
+        width: 100px;
+        left: -100%;
+        background: #7f8fa6;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 400;
+        border: none;
+        transition: 0.5s;
+        color: #fff;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    button.btn-search:hover {
+        background: #4834d4;
+        color: #fff;
+    }
+
+    .counter {
+        text-align: center;
+        font-family: Arial,Helvetica Neue,sans-serif;
+        line-height: 1.43;
+        font-size: 14px;
+    }
+
+    .block-stats {
+        margin-top: 5%;
+        font-family: Arial,Helvetica Neue,sans-serif;
+        font-size: 16px;
+    }
+
 </style>
 <div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center"></div>
-<div class="banner-content">
-        <h1 class="fw-light">Discover our courses</h1>
-        <p>Checkout our new courses on biology, chemistry, computer science etc. Start your journey by signing in.
-          If you don't have an account please sign up to get one for free
-        </p>
-        <div>
-            <button type="button" onclick="window.location.href={% url 'register' %}">Sign Up</button>
+    <div class="banner-content">
+        <h1 style="font-size: 38px; font-weight: bold">There is a course for everyone</h1>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search here..." aria-label="Search">
+          <button class="btn-search" type="submit">GO</button>
+        </form>
+        <div class="counter">
+            <div class="block-stats">{{ course_num }} <span>courses available</span></div>
         </div>
+
     </div>
-{% for course in courses %}
+
 <div class="album py-5">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col-sm">
+    <div class="container-md">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for course in courses %}
+                <div class="col">
                 <div class="card">
                     <img src="{{ course.image.url }}" width="100%" height="100%"
                          style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
@@ -32,14 +79,17 @@
                         <h4>{{course.title}}  <span class="badge" style="background: green; font-size: 10px">{{ course.category.name }}</span></h4>
                         <p class="card-text">{{course.description|truncatechars:150}}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <a href="{% url 'course_details' course.slug %}">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            </a>
                             <small class="text-muted">{{course.num_lessons}} modules</small>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-{% endfor %}
+
 {% endblock %}

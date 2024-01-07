@@ -1,13 +1,18 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Course, Module, Exercise, Category
+from .models import Course, Module, Exercise, Category, ExerciseType
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name",)
     prepopulated_fields = {"slug": ("name",)}
+
+
+@admin.register(ExerciseType)
+class ExerciseTypeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
 
 
 class ModuleInLine(admin.TabularInline):
@@ -36,13 +41,13 @@ class CourseAdmin(admin.ModelAdmin):
 class ExerciseInLine(admin.TabularInline):
     model = Exercise
     list_display = ("__str__", "ex_type", "points")
-    readonly_fields = ("ex_type",)
+    prepopulated_fields = {"slug": ("title",)}
 
 
 @admin.register(Module)
 class ModuleAdmin(admin.ModelAdmin):
     inlines = [ExerciseInLine]
-    list_display = ("__str__", "created_at", "nm_exercises")
+    list_display = ("__str__", "created_at", "total_score", "nm_exercises")
     readonly_fields = ("get_image",)
     prepopulated_fields = {"slug": ("title",)}
 
@@ -55,6 +60,6 @@ class ModuleAdmin(admin.ModelAdmin):
 @admin.register(Exercise)
 class ExerciseAdmin(admin.ModelAdmin):
     model = Exercise
-    list_display = ("__str__", "created_at", "ex_type", "points")
-    readonly_fields = ("ex_type", "created_at")
+    list_display = ("__str__", "created_at", "ex_type", "module", "points")
+    readonly_fields = ("created_at",)
     prepopulated_fields = {"slug": ("title",)}
