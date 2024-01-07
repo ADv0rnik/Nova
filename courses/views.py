@@ -31,12 +31,12 @@ class CourseDetailView(DetailView):
     slug_url_kwarg = "course_slug"
 
     def get_queryset(self):
-        course = Course.objects.filter(slug=self.kwargs['course_slug'])
+        course = Course.objects.filter(slug=self.kwargs["course_slug"])
         return course
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['modules'] = context['course'].course_module.all()
+        context["modules"] = context["course"].course_module.all()
         return context
 
 
