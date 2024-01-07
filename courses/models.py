@@ -105,7 +105,10 @@ class Module(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.slug = slugify(self.title)
+            if module := Module.objects.filter(slug=slugify(self.title)):
+                self.slug = slugify(f"{self.title}-{module.count() + 1}")
+            else:
+                self.slug = slugify(self.title)
         super(Module, self).save(*args, **kwargs)
 
     class Meta:
