@@ -33,6 +33,7 @@ class Course(models.Model):
     title = models.CharField(_("Title"), max_length=255)
     num_lessons = models.IntegerField(_("Number Of Lessons"), default=0)
     description = models.TextField(_("Description"), null=True, blank=True)
+    language = models.TextField(_("Language"), null=False, blank=False, default="English")
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="course_category"
     )
