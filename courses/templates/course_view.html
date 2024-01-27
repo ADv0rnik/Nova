@@ -3,8 +3,12 @@
 
 
 {% block content %}
+<script>
+    function goHref(){
+        location.href="{% url 'modules_content' course_slug=course.slug %}"
+    }
+</script>
 <style>
-
     ion-icon {
       font-size: 16px;
     }
@@ -12,6 +16,7 @@
     .nav-course-title {
       text-align: center;
       font-style: normal;
+      font-family: 'Ubuntu', monospace;
       font-weight: 400;
       font-display: swap;
       font-size: 18px;
@@ -19,6 +24,7 @@
 
     .nav-course-info {
       font-size: 16px;
+      font-family: 'Ubuntu', monospace;
     }
 
     .nav-link {
@@ -44,6 +50,7 @@
 
     .content {
       font-style: normal;
+      font-family: 'Ubuntu', monospace;
       font-size: 16px;
     }
 
@@ -75,16 +82,14 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn" style="text-align: center;">
-                            <button type="button" onclick="window.location.href=#" class="btn-start">
-                                Start course
-                            </button>
+                             <button type="button" onclick="goHref()" class="btn-start">Start course</button>
                         </div>
                     </li>
                 </ul>
                 <hr>
                 <ul class="nav flex-column mb-2 pb-5">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'course_details' course.slug %}">
                             <ion-icon name="information-circle-outline"></ion-icon>
                             Information
                         </a>

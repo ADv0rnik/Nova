@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from .models import Course, Module
-
+from profiles.models import Profile, CourseResults
 
 logger = logging.getLogger("adukar")
 logger.event_source = __name__
@@ -38,6 +38,27 @@ class CourseDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["modules"] = context["course"].course_module.all()
         return context
+
+
+def get_module_list(request, course_slug):
+    # breakpoint()
+    # user_id = request.user.id
+    # profile = Profile.objects.get(user__id=user_id)
+    course = Course.objects.get(slug=course_slug)
+    # course_results = CourseResults(
+    #     profile=profile,
+    #     course=course,
+    #     passed=False
+    # )
+    # course_results.save()
+
+    modules = course.course_module.all()
+
+    context = {
+        "course": course,
+        "modules": modules,
+    }
+    return render(request, "modules_list.html", context)
 
 
 @lru_cache()

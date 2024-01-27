@@ -100,6 +100,7 @@ li a:hover {
     border-radius: 30px;
     text-transform: uppercase;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .btn-signup {
