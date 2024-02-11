@@ -76,16 +76,8 @@ def get_module_list(request, course_slug):
     return render(request, "modules_list.html", context)
 
 
-def create_course_result(
-        profile: Profile,
-        course: Course,
-        passed=False
-):
-    course_results = CourseResults(
-        profile=profile,
-        course=course,
-        passed=passed
-    )
+def create_course_result(profile: Profile, course: Course, passed=False):
+    course_results = CourseResults(profile=profile, course=course, passed=passed)
     course_results.save()
 
 
