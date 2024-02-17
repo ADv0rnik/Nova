@@ -117,7 +117,6 @@ class Module(models.Model):
     class Meta:
         verbose_name = _("Module")
         verbose_name_plural = _("Modules")
-        ordering = ["course"]
 
 
 class Exercise(models.Model):
