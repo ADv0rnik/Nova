@@ -96,10 +96,17 @@
                     </li>
                     <li class="nav-item">
                         <div class="nav-btn" style="text-align: center;">
-                            {% if is_course_result %}
-                                <button type="button" onclick="goHref()" class="btn-continue">Continue course</button>
+                            {% if is_user %}
+                                {% if is_course_result %}
+                                    <button type="button" onclick="goHref()" class="btn-continue">Continue course</button>
+                                {% else %}
+                                    <button type="button" onclick="goHref()" class="btn-start">Start course</button>
+                                {% endif %}
                             {% else %}
-                                <button type="button" onclick="goHref()" class="btn-start">Start course</button>
+                                <p>
+                                    <ion-icon name="warning-outline"></ion-icon>
+                                    You are not authorized
+                                </p>
                             {% endif %}
                         </div>
                     </li>

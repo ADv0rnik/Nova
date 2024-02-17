@@ -37,19 +37,23 @@ class CourseDetailView(DetailView):
     # TODO: Needs to optimize queries to database
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        user_id = self.request.user.id
-        profile = Profile.objects.get(user__id=user_id)
         is_course_result = False
+        is_user = False
 
-        if course_results := CourseResults.objects.filter(profile__id=profile.id):
-            for course_result in course_results:
-                if course_result.course.slug == self.kwargs["course_slug"]:
-                    is_course_result = True
-                    break
+        if user_id := self.request.user.id:
+            profile = Profile.objects.get(user__id=user_id)
+            is_user = True
+
+            if course_results := CourseResults.objects.filter(profile__id=profile.id):
+                for course_result in course_results:
+                    if course_result.course.slug == self.kwargs["course_slug"]:
+                        is_course_result = True
+                        break
 
         context = super().get_context_data(**kwargs)
         context["modules"] = context["course"].course_module.all()
         context["is_course_result"] = is_course_result
+        context["is_user"] = is_user
 
         return context
 
