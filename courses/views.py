@@ -51,7 +51,7 @@ class CourseDetailView(DetailView):
                         break
 
         context = super().get_context_data(**kwargs)
-        context["modules"] = context["course"].course_module.all().order_by('pk')
+        context["modules"] = context["course"].course_module.all().order_by("pk")
         context["is_course_result"] = is_course_result
         context["is_user"] = is_user
 
@@ -72,7 +72,7 @@ def get_module_list(request, course_slug):
     else:
         create_course_result(profile, course)
 
-    modules = course.course_module.all().order_by('pk')
+    modules = course.course_module.all().order_by("pk")
     context = {
         "course": course,
         "modules": modules,
